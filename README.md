@@ -1,2 +1,1 @@
-Blev fel när jag döpte mitt projekt. ASP_MVC är min Presentation.
-
+App is not working. Crashed and I had to re-step
