@@ -1,0 +1,49 @@
+﻿@using System.Security.Claims
+
+<header id="header">
+    <div id="settings-container">
+        <button type="button" data-type="dropdown" data-target="#settings-dropdown" class="btn-settings">
+            <i class="fa fa-gear"></i>
+        </button>
+    </div>
+    <div id="account-container">
+        <button type="button" data-type="dropdown" data-target="#account-dropdown" class="btn-account">
+            <img src="/images/users/user-template-male-yellow.svg" alt="template-avatar">
+        </button>
+        <div id="account-dropdown" class="dropdown">
+            @if (User.Identity.IsAuthenticated)
+                {
+                <div class="dropdown-header">
+                    <div class="account-name">
+                        <img src="/images/users/user-template-male-yellow.svg" alt="template-avatar">
+                        <span>@User.FindFirstValue(ClaimTypes.Name)</span>
+                    </div>
+                </div>
+                }
+            <div class="dropdown-body">
+                @if (User.Identity.IsAuthenticated)
+                    {
+                    <form id="logout-form" asp-controller="Auth" asp-action="Logout" method="post" style="display: none;">
+                        @Html.AntiForgeryToken()
+                    </form>
+
+                    <a class="dropdown-action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </a>
+                    }
+                else
+                    {
+                    <a class="dropdown-action" href="/auth/login">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Login</span>
+                    </a>
+                    <a class="dropdown-action" href="/auth/signup">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Sign Up</span>
+                    </a>
+                    }
+            </div>
+        </div>
+    </div>
+</header>

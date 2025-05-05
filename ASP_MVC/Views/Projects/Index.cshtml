@@ -1,0 +1,42 @@
+﻿@using Presentation.Models
+
+@model ProjectsViewModel
+@{
+	ViewData["Title"] = "Projects";
+}
+
+<div id="projects" class="page">
+    <div class="page-header">
+        <h2>Projects</h2>
+        <button type="button" class="btn" data-type="modal" data-target="#add-project-modal">
+            <i class="fa fa-solid fa-plus"></i>
+            <span>Add Project</span>
+        </button>
+    </div>
+    <div class="project-filters">
+        <a asp-action="Index" asp-route-status="all" class="project-filter @(Model.CurrentStatus == "all" ? "active" : "")">
+            ALL [@Model.AllCount]
+        </a>
+        <a asp-action="Index" asp-route-status="started" class="project-filter @(Model.CurrentStatus == "started" ? "active" : "")">
+            STARTED [@Model.StartedCount]
+        </a>
+        <a asp-action="Index" asp-route-status="completed" class="project-filter @(Model.CurrentStatus == "completed" ? "active" : "")">
+            COMPLETED [@Model.CompletedCount]
+        </a>
+    </div>
+    <section class="project-list">
+        @if (Model.Projects != null && Model.Projects.Any())
+        {
+            @foreach (var project in Model.Projects)
+            {
+                @await Html.PartialAsync("ListItems/_ProjectListItemPartial", project)
+            }
+        }
+
+    </section>
+</div>
+
+@await Html.PartialAsync("Modals/_AddProjectModalPartial", Model.AddProjectFormData)
+@await Html.PartialAsync("Modals/_EditProjectModalPartial", Model.EditProjectFormData)
+
+}

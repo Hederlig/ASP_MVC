@@ -1,0 +1,37 @@
+﻿@using Presentation.Models
+@model ProjectViewModel
+
+<div class="project card" data-project-id="@Model.Id">
+    <div class="card-header">
+        <div class="project-image">
+            <img src="/images/project-image.svg" alt="template project">
+        </div>
+        <h6 class="project-name">@Model.ProjectName</h6>
+        <span class="client-name">@Model.ClientName</span>
+        <div id="project-actions-container">
+            <button type="button" data-type="dropdown" data-target="#project-dropdown-@Model.Id" class="btn-action">
+                <i class="fa-solid fa-ellipsis"></i>
+            </button>
+            <div id="project-dropdown-@Model.Id" class="dropdown">
+                <div class="dropdown-body">
+                    <nav class="dropdown-actions">
+                        <button data-type="modal" data-target="#edit-project-modal" data-id="@Model.Id" class="dropdown-action">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>Edit</span>
+                        </button>
+                    </nav>
+                    <div class="divider"></div>
+                    <nav class="dropdown-actions">
+                        <a href="#" class="dropdown-action remove" data-id="@Model.Id" onclick="confirmDelete('@Model.Id')">
+                            <i class="fa-solid fa-trash"></i>
+                            <span>Delete Project</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <p>@Html.Raw(Model.Description)</p>
+    </div>
+</div>

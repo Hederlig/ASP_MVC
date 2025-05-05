@@ -1,9 +1,8 @@
-using Business.Services;
+﻿using Business.Services;
 using Data.Contexts;
 using Data.Entities;
 using Data.Repositories;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,8 +26,8 @@ builder.Services.ConfigureApplicationCookie(x =>
     x.AccessDeniedPath = "/auth/denied";
     x.Cookie.HttpOnly = true;
     x.Cookie.IsEssential = true;
-    x.Cookie.Expiration = TimeSpan.FromHours(1);
-    x.SlidingExpiration = true;
+    //x.Cookie.Expiration = TimeSpan.FromHours(1);
+    //x.SlidingExpiration = true;
 
 });
 

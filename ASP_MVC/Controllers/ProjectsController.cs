@@ -1,6 +1,8 @@
 ﻿using Business.Services;
+using Domain.Extensions;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Models;
 
 namespace Presentation.Controllers;
 
@@ -12,7 +14,7 @@ public class ProjectsController(IProjectService projectService) : Controller
         {
         var model = new ProjectsViewModel
             {
-            Projects = await _projectService.GetProjectAsync()
+            Projects = (IEnumerable<ProjectViewModel>)await _projectService.GetProjectAsync()
             };
         return View(model);
         }

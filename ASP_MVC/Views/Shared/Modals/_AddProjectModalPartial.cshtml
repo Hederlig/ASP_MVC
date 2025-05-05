@@ -1,0 +1,75 @@
+﻿@using Presentation.Models
+@model AddProjectViewModel
+
+<section id="add-project-modal" class="modal">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add Project</h3>
+            <button class="btn-close" data-type="close" data-target="#add-project-modal">&times;</button>
+        </div>
+        <div class="card-body">
+            <div class="image-preview-container">
+                <img id="image-preview" src="/images/project-image.svg">
+            </div>
+            <form asp-controller="Projects" asp-action="Add" method="post" novalidate>
+                <div class="form-group">
+                    <label class="form-label">Project Name</label>
+                    <input class="form-input" type="text" placeholder="Project Name" asp-for="ProjectName" />
+                    <span asp-validation-for="ProjectName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Client Name</label>
+                    <input class="form-input" type="text" placeholder="Client Name" asp-for="ClientName" />
+                    <span asp-validation-for="ClientName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <div class="wysiwyg">
+                        <textarea id="add-project-description" asp-for="Description" data-quill-textarea="#add-project-description-wysiwyg-editor"></textarea>
+                        <div id="add-project-description-wysiwyg-editor" data-quill-editor data-quill-toolbar="#add-project-description-wysiwyg-toolbar" class="wysiwyg-editor"></div>
+                        <div id="add-project-description-wysiwyg-toolbar" class="wysiwyg-toolbar">
+                            <span class="ql-formats">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-align" value=""></button>
+                                <button class="ql-align" value="center"></button>
+                                <button class="ql-align" value="right"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-list" value="bullet"></button>
+                                <button class="ql-list" value="ordered"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-link"></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal-group">
+                    <div class="form-group">
+                        <label class="form-label">Start Date</label>
+                        <input class="form-input" type="date" asp-for="StartDate" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">End Date</label>
+                        <input class="form-input" type="date" asp-for="EndDate" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Budget</label>
+                    <div class="form-input-extended">
+                        <i class="fa-solid fa-dollar-sign"></i>
+                        <input class="form-input" type="number" placeholder="0" asp-for="Budget" step="0.01" />
+                    </div>
+                </div>
+                <button type="submit" class="btn">Create</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+@await Html.PartialAsync("_ValidationScripts")
